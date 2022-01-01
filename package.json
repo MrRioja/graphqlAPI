@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "npx nodemon --exec babel-node src/index.js"
+    "dev": "npx nodemon --exec babel-node src/index.js -e js,gql"
   },
   "author": "Luiz Rioja <lulyrioja@gmail.com>",
   "devDependencies": {
@@ -15,8 +15,14 @@
     "nodemon": "^2.0.15"
   },
   "dependencies": {
-    "apollo-server": "^3.5.0",
+    "@graphql-tools/load-files": "^6.5.3",
+    "@graphql-tools/merge": "^8.2.1",
+    "@graphql-tools/schema": "^8.3.1",
+    "apollo-server-core": "^3.6.1",
+    "apollo-server-express": "^3.6.1",
+    "express": "^4.17.2",
     "graphql": "^16.2.0",
-    "mongoose": "^6.1.4"
+    "mongoose": "^6.1.4",
+    "subscriptions-transport-ws": "^0.11.0"
   }
 }
