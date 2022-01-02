@@ -1,5 +1,8 @@
 import User from "../../../models/User";
 import { USER_ADDED } from "./channels";
+import { PubSub } from "graphql-subscriptions";
+
+const pubsub = new PubSub();
 
 export default {
   User: {
@@ -10,7 +13,7 @@ export default {
     user: async (_, { id }) => await User.findById(id),
   },
   Mutation: {
-    createUser: async (_, { data }, { pubsub }) => {
+    createUser: async (_, { data }) => {
       const user = await User.create(data);
 
       pubsub.publish(USER_ADDED, {
@@ -25,7 +28,7 @@ export default {
   },
   Subscription: {
     userAdded: {
-      subscribe: (obj, args, { pubsub }) => pubsub.asyncIterator(USER_ADDED),
+      subscribe: () => pubsub.asyncIterator([USER_ADDED]),
     },
   },
 };
